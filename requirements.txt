@@ -2,8 +2,8 @@ streamlit
 langchain
 langchain-community
 openai
-pinecone-client
+pinecone
 tiktoken
 pypdf
 tqdm
-python-dotenv
+dotenv
