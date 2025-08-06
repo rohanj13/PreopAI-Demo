@@ -9,6 +9,7 @@ import tiktoken
 from pinecone import Pinecone, ServerlessSpec
 from openai import OpenAI
 from time import sleep
+from io import StringIO
 
 # Load environment variables
 # load_dotenv()
@@ -120,3 +121,19 @@ if run_button and query.strip():
 
         st.subheader("AI Output")
         st.text_area("Response", value=response.choices[0].message.content, height=500, width=700)
+
+        download_content = (
+            "=== Clinical Query ===\n"
+            f"{query}\n\n"
+            "=== System Prompt ===\n"
+            f"{system_prompt}\n\n"
+            "=== AI Response ===\n"
+            f"{response.choices[0].message.content}\n"
+        )
+
+        st.download_button(
+            label="Download Analysis (.txt)",
+            data=download_content,
+            file_name="preopai_analysis.txt",
+            mime="text/plain"
+        )
